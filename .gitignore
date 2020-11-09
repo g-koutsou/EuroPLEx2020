@@ -1,0 +1,6 @@
+*~
+*.o
+AoS-to-SoA/space-time-aos
+AoS-to-SoA/space-time-soa
+AoS-to-SoA/*.txt
+AoS-to-SoA/*.png
