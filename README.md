@@ -8,8 +8,8 @@ This branch contains exercises for the practicals sessions of "High Performance 
 
 Exercises include:
 
-1. AoS-to-SoA
+1. [AoS-to-SoA](https://github.com/g-koutsou/EuroPLEx2020/tree/exercises/AoS-to-SoA)
 
 ### Preparation
 
-Following the practicals requires a C compiler with OpenMP support and a Python interpreter with modules `matplotlib` and `numpy` available. Instructions on how to install and test these can be found under the `prep` branch, the default branch of this repository.
+Following the practicals requires a C compiler with OpenMP support and a Python interpreter with modules [`matplotlib`](https://matplotlib.org) and [`numpy`](https://numpy.org) available. Instructions on how to install and test these can be found under the [`prep`](https://github.com/g-koutsou/EuroPLEx2020/tree/prep) branch, the default branch of this repository.
