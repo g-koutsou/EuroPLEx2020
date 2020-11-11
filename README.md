@@ -9,6 +9,7 @@ This branch contains exercises for the practicals sessions of "High Performance 
 Exercises include:
 
 1. [AoS-to-SoA](https://github.com/g-koutsou/EuroPLEx2020/tree/exercises/AoS-to-SoA)
+2. [Lapl](https://github.com/g-koutsou/EuroPLEx2020/tree/exercises/Lapl)
 
 ### Preparation
 
