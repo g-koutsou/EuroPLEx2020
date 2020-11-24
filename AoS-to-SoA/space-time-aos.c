@@ -127,8 +127,8 @@ main(int argc, char *argv[])
     /*
      * t0acc is the average time, t1acc is its error
      */
-    double beta_fp = /* _TODO_A_: insert number of Gflop/sec based on timing */;
-    double beta_io = /* _TODO_A_: insert number of Gbyte/sec based on timing */;
+    double beta_fp = (7.0*L)/t0acc/1e9               /* _TODO_A_: insert number of Gflop/sec based on timing */;
+    double beta_io = (5.0*sizeof(float)*L)/t0acc/1e9 /* _TODO_A_: insert number of Gbyte/sec based on timing */;
     int nthr = 0;
 #pragma omp parallel
     {

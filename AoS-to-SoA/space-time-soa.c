@@ -76,6 +76,16 @@ comp_s(st_coords *arr, int L)
 {
   /* _TODO_B_: complete the kernel */
 #pragma omp parallel for
+  for(int i=0; i<L/VL; i++)
+    for(int j=0; j<VL; j++) {
+      arr[i].s[j] =
+	arr[i].t[j]*arr[i].t[j] -
+	(
+	 arr[i].x[j]*arr[i].x[j] +
+	 arr[i].y[j]*arr[i].y[j] +
+	 arr[i].z[j]*arr[i].z[j]
+	 );
+    }
   return;
 }
 
@@ -124,8 +134,8 @@ main(int argc, char *argv[])
       }
       n++;
     }
-    double beta_fp = /* _TODO_A_: insert number of Gflop/sec based on timing */;
-    double beta_io = /* _TODO_A_: insert number of Gbyte/sec based on timing */;
+    double beta_fp = (7.0*L)/t0acc/1e9               /* _TODO_A_: insert number of Gflop/sec based on timing */;
+    double beta_io = (5.0*sizeof(float)*L)/t0acc/1e9 /* _TODO_A_: insert number of Gbyte/sec based on timing */;
     int nthr = 0;
 #pragma omp parallel
     {

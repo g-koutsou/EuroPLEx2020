@@ -231,6 +231,10 @@ lapl(size_t L, field *out, field *in, link *g)
 	  /*
 	   * use shift_dn() or shift_up() here accordingly
 	   */
+	  shift_dn(g_vm0_0_re);
+	  shift_dn(g_vm0_0_im);
+	  shift_dn(in_vm0_re);
+	  shift_dn(in_vm0_im);
 	}
 	
 	/*
@@ -244,6 +248,8 @@ lapl(size_t L, field *out, field *in, link *g)
 	  /*
 	   * use shift_dn() or shift_up() here accordingly
 	   */
+	  shift_up(in_vp0_re);
+	  shift_up(in_vp0_im);
 	}
 	
 	for(int j=0; j<VL; j++) {
@@ -256,17 +262,17 @@ lapl(size_t L, field *out, field *in, link *g)
 	   * new data layout. 
 	   *
 	   */
-	  p_re  = ; /* Direction x+, real part */
-	  p_im  = ; /* Direction x+, imag part */
-
-	  p_re += ; /* Direction x-, real part */
-	  p_im += ; /* Direction x-, imag part */
-	  
-	  p_re += ; /* Direction y+, real part */
-	  p_im += ; /* Direction y+, imag part */
-
-	  p_re += ; /* Direction y-, real part */
-	  p_im += ; /* Direction y-, imag part */
+	  p_re  =   in_v0p_re[j]*g_v00_1_re[j] - in_v0p_im[j]*g_v00_1_im[j]; /* Direction x+, real part */
+	  p_im  =   in_v0p_re[j]*g_v00_1_im[j] + in_v0p_im[j]*g_v00_1_re[j]; /* Direction x+, imag part */
+		                                                           
+	  p_re +=   in_v0m_re[j]*g_v0m_1_re[j] + in_v0m_im[j]*g_v0m_1_im[j]; /* Direction x-, real part */
+	  p_im +=  -in_v0m_re[j]*g_v0m_1_im[j] + in_v0m_im[j]*g_v0m_1_re[j]; /* Direction x-, imag part */
+	  	                                                           
+	  p_re +=   in_vp0_re[j]*g_v00_0_re[j] - in_vp0_im[j]*g_v00_0_im[j]; /* Direction y+, real part */
+	  p_im +=   in_vp0_re[j]*g_v00_0_im[j] + in_vp0_im[j]*g_v00_0_re[j]; /* Direction y+, imag part */
+		                                                           
+	  p_re +=   in_vm0_re[j]*g_vm0_0_re[j] + in_vm0_im[j]*g_vm0_0_im[j]; /* Direction y-, real part */
+	  p_im +=  -in_vm0_re[j]*g_vm0_0_im[j] + in_vm0_im[j]*g_vm0_0_re[j]; /* Direction y-, imag part */
 	  
 	  out[v00].phi_re[j] = NDx2*in[v00].phi_re[j] - p_re;
 	  out[v00].phi_im[j] = NDx2*in[v00].phi_im[j] - p_im;
@@ -422,8 +428,8 @@ cg(size_t L, field *x, field *b, link *g)
    * accumulated the time spent in the laplacian operator application.
    *
    */
-  int N_fp_per_site = 0;
-  int N_op_per_site = 0;
+  int N_fp_per_site = 34;
+  int N_io_per_site = sizeof(float)*(2 + 4 + 2);
   double beta_fp = N_fp_per_site*((double)L*L)/(t_lapl/(double)iter)*1e-9;
   double beta_io = N_io_per_site*((double)L*L)/(t_lapl/(double)iter)*1e-9;
   printf(" Converged after %6d iterations, res = %+e\n", iter, rr/bb);  

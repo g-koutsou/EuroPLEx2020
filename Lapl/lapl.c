@@ -147,17 +147,17 @@ lapl(size_t L, field *out, field *in, link *g)
        * Complete the laplacian operation
        *
        */
-      p_re  = ; /* Direction x+, real part */
-      p_im  = ; /* Direction x+, imag part */     
+      p_re  = in[v0p].phi_re*g[v00].u_re[1] - in[v0p].phi_im*g[v00].u_im[1]; /* Direction x+, real part */
+      p_im  = in[v0p].phi_im*g[v00].u_re[1] + in[v0p].phi_re*g[v00].u_im[1]; /* Direction x+, imag part */     
 					   				   
-      p_re += ; /* Direction x-, real part */
-      p_im += ; /* Direction x-, imag part */     
+      p_re += in[v0m].phi_re*g[v0m].u_re[1] + in[v0m].phi_im*g[v0m].u_im[1]; /* Direction x-, real part */
+      p_im +=-in[v0m].phi_re*g[v0m].u_im[1] + in[v0m].phi_im*g[v0m].u_re[1]; /* Direction x-, imag part */     
 					   				   
-      p_re += ; /* Direction y+, real part */
-      p_im += ; /* Direction y+, imag part */     
+      p_re += in[vp0].phi_re*g[v00].u_re[0] - in[vp0].phi_im*g[v00].u_im[0]; /* Direction y+, real part */
+      p_im += in[vp0].phi_im*g[v00].u_re[0] + in[vp0].phi_re*g[v00].u_im[0]; /* Direction y+, imag part */     
 					   				   
-      p_re += ; /* Direction y-, real part */
-      p_im += ; /* Direction y-, imag part */     
+      p_re += in[vm0].phi_re*g[vm0].u_re[0] + in[vm0].phi_im*g[vm0].u_im[0]; /* Direction y-, real part */
+      p_im +=-in[vm0].phi_re*g[vm0].u_im[0] + in[vm0].phi_im*g[vm0].u_re[0]; /* Direction y-, imag part */     
 
       out[v00].phi_re = NDx2*in[v00].phi_re - p_re;
       out[v00].phi_im = NDx2*in[v00].phi_im - p_im;
@@ -313,8 +313,8 @@ cg(size_t L, field *x, field *b, link *g)
    * accumulated the time spent in the laplacian operator application.
    *
    */
-  int N_fp_per_site = 0;
-  int N_op_per_site = 0;
+  int N_fp_per_site = 34;
+  int N_io_per_site = sizeof(float)*(2 + 4 + 2);
   double beta_fp = N_fp_per_site*((double)L*L)/(t_lapl/(double)iter)*1e-9;
   double beta_io = N_io_per_site*((double)L*L)/(t_lapl/(double)iter)*1e-9;
   printf(" Converged after %6d iterations, res = %+e\n", iter, rr/bb);  

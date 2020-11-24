@@ -1,0 +1,6 @@
+Time in lapl(): +1.117e-04 sec/call 4.99e+00 Gflop/s 4.69e+00 GB/s 128
+Time in lapl(): +3.375e-04 sec/call 6.60e+00 Gflop/s 6.21e+00 GB/s 256
+Time in lapl(): +1.320e-03 sec/call 6.75e+00 Gflop/s 6.35e+00 GB/s 512
+Time in lapl(): +5.645e-03 sec/call 6.32e+00 Gflop/s 5.94e+00 GB/s 1024
+Time in lapl(): +2.173e-02 sec/call 6.56e+00 Gflop/s 6.18e+00 GB/s 2048
+Time in lapl(): +8.741e-02 sec/call 6.53e+00 Gflop/s 6.14e+00 GB/s 4096
